@@ -1,0 +1,6 @@
+ const scrollToSection = () => {
+  const section = document.querySelector("#marcas");
+  if (section) {
+    section.scrollIntoView({ behavior: "smooth" });
+   }
+ };
