@@ -10,7 +10,7 @@ const scrollToSection = () => {
   <div class="bg-secondary text-white" id="inicio">
     <div class="row">
       <div class="col-12 justify-center flex mobile-only">
-        <q-img class="imgm" src="../../assets/imgm.png" />
+        <q-img class="imgMiguel" src="../../assets/imgm.png" />
       </div>
       <div
         class="justify-center items-center col-xs-12 col-sm-12 col-md-6 col-lg-6 col-xl-6"
@@ -66,17 +66,17 @@ const scrollToSection = () => {
   </div>
 </template>
 
-<style lang="sass">
-.imgm
-  width: 60%
-  height: auto
-  max-height: 400px
+<style lang="scss">
+.imgMiguel {
+  width: 60%;
+  height: auto;
+  max-height: 400px;
 
-  @media only screen and (min-width: 400px) and (max-width: 990px)
-  .imgm
-  width: 50%
-  height: auto
-  max-height: 800px
-
+  @media only screen and (min-width: 400px) and (max-width: 990px) {
+    width: 50%;
+    height: auto;
+    max-height: 800px;
+  }
+}
 //  transform: translateX(120%) translateY(130%)
 </style>
