@@ -21,12 +21,12 @@ const { ruleEmail, rulePassLen, ruleRequired } = useFormRules();
 
 // iniciando con google
 const provider = new GoogleAuthProvider();
-async function autenticarConGoogle () {
-await signInWithPopup(auth, provider).then(async (result) => {
+async function autenticarConGoogle() {
+  await signInWithPopup(auth, provider).then(async (result) => {
     $q.notify({
-          type: 'ongoing',
-          timeout: 1000,
-        })
+      type: "ongoing",
+      timeout: 1000,
+    });
     const { user } = result;
     const userData = doc(db, `usuarios/${user.uid}`);
     const dataRespuesta = await getDoc(userData);
@@ -45,7 +45,7 @@ await signInWithPopup(auth, provider).then(async (result) => {
     }
     //
   });
-};
+}
 
 //login boton original
 const procesarInicio = () => {
