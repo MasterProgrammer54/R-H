@@ -37,7 +37,7 @@ listAll(ruta).then((result) => {
 });
 </script>
 <template>
-  <q-page class="bg-secondary q-px-md" id="galeria">
+  <q-page class="bg-secondary q-px-md" >
     <div
       class="text-primary text-h4"
       :class="[$q.screen.xs ? 'q-pt-xl text-center ' : 'q-mx-xl q-px-xl']"

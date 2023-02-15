@@ -64,12 +64,6 @@ const procesarInicio = () => {
       });
   }
 };
-
-const irRegistro = () => {
-  router.push({
-    path: "/registrarse",
-  });
-};
 </script>
 
 <template>
@@ -141,9 +135,7 @@ const irRegistro = () => {
             />
             <p class="q-mt-lg">
               Aun no estas registrado?
-              <a class="irRegistro text-bold" @click="irRegistro"
-                >REGISTRARSE</a
-              >
+              <router-link to="/registrarse" class="irRegistro text-bold">REGISTRARSE</router-link>
             </p>
           </q-card-actions>
         </q-card>

@@ -26,10 +26,10 @@ const redirectWhatsapp = () => {
 
 <template class="bg-secondary">
   <div>
-    <Inicio />
-    <Servicios />
-    <Galeria />
-    <Marcas />
+    <Inicio id="inicio" />
+    <Servicios id="galeria"/>
+    <Galeria id="galeria" />
+    <Marcas  id="marcas"/>
     <Contacto />
   </div>
 

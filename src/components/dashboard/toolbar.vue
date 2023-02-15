@@ -42,12 +42,20 @@ const showModal = ref(false);
       @click="salir"
       v-if="$q.platform.is.desktop"
     />
+
     <q-btn class="q-ma-md" outline color="primary" @click="showModal = true"
       ><span v-if="$q.platform.is.desktop">Agregar Imagen</span>
       <q-icon name="add_a_photo" class="q-ml-xs"></q-icon
     ></q-btn>
+    <q-btn
+      class="q-ma-md"
+      outline
+icon="logout"
+      color="primary"
+      @click="salir"
+      v-if="$q.platform.is.mobile"
+    />
     <q-space />
-
     <q-tabs v-model="tab" shrink class="q-mr-xl" active-color="primary">
       <q-tab name="Galeria" label="Galeria" />
 

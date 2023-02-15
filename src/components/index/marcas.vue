@@ -42,7 +42,7 @@ marcaLimite.value = marcas.value.length;
 };
 </script>
 <template>
-  <q-page class="bg-secondary text-white q-my-xl q-py-xl" id="marcas">
+  <q-page class="bg-secondary text-white q-my-xl q-py-xl">
     <div class="text-h4 text-primary text-center q-mt-xl q-pa-sm">
       MARCAS QUE SOLEMOS REPARAR CON FRECUENCIA
     </div>

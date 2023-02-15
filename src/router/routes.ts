@@ -1,25 +1,29 @@
 import { RouteRecordRaw } from "vue-router";
+import requiresAuth from "../boot/auth";
 
-const routes: RouteRecordRaw[] = [
+const routes: Array<RouteRecordRaw> = [
   {
     path: "/",
+
     component: () => import("layouts/MainLayout.vue"),
     children: [
-      { path: "/", component: () => import("pages/IndexPage.vue") },
+      {
+        path: "/",
+        name: "inicio",
+        component: () => import("pages/IndexPage.vue"),
+      },
 
       {
         path: "/login",
-        meta: { autenticado: true },
         component: () => import("pages/login.vue"),
       },
       {
         path: "/registrarse",
-        meta: { autenticado: true },
         component: () => import("pages/registrarse.vue"),
       },
       {
         path: "/dashboard",
-        meta: { autenticado: true },
+        beforeEnter: requiresAuth,
         component: () => import("pages/dashboard.vue"),
       },
     ],

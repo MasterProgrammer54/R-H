@@ -7,7 +7,7 @@ const scrollToSection = () => {
 };
 </script>
 <template>
-  <div class="bg-secondary text-white" id="inicio">
+  <div class="bg-secondary text-white">
     <div class="row">
       <div class="col-12 justify-center flex mobile-only">
         <q-img class="imgMiguel" src="../../assets/imgm.png" />

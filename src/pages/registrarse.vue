@@ -107,11 +107,7 @@ const procesarRegistro = () => {
   }
 };
 
-const irlogin = () => {
-  router.push({
-    path: "/login",
-  });
-};
+
 </script>
 
 <template>
@@ -189,7 +185,7 @@ const irlogin = () => {
             />
             <p class="q-mt-lg">
               Puedes volver al
-              <a class="irlogin text-bold" @click="irlogin">LOGIN AQUI</a>
+              <router-link to="/login" class="irlogin text-bold">LOGIN</router-link>
             </p>
           </q-card-actions>
         </q-card>
