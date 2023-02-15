@@ -7,7 +7,7 @@ import subirImage from "../dashboard/subirImagen.vue";
 componets: {
   subirImage;
 }
-const tab = ref('Galeria')
+const tab = ref("Galeria");
 const router = useRouter();
 const usuarioName = ref<string | null>(null);
 auth.onAuthStateChanged((user) => {
@@ -50,7 +50,7 @@ const showModal = ref(false);
     <q-btn
       class="q-ma-md"
       outline
-icon="logout"
+      icon="logout"
       color="primary"
       @click="salir"
       v-if="$q.platform.is.mobile"
@@ -58,7 +58,6 @@ icon="logout"
     <q-space />
     <q-tabs v-model="tab" shrink class="q-mr-xl" active-color="primary">
       <q-tab name="Galeria" label="Galeria" />
-
     </q-tabs>
   </q-toolbar>
   <div>

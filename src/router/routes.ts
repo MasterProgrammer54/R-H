@@ -1,5 +1,5 @@
 import { RouteRecordRaw } from "vue-router";
-import requiresAuth from "../boot/auth";
+import requiresAuth from "../boot/authRouter";
 
 const routes: Array<RouteRecordRaw> = [
   {
@@ -15,10 +15,12 @@ const routes: Array<RouteRecordRaw> = [
 
       {
         path: "/login",
+        beforeEnter: requiresAuth,
         component: () => import("pages/login.vue"),
       },
       {
         path: "/registrarse",
+        beforeEnter: requiresAuth,
         component: () => import("pages/registrarse.vue"),
       },
       {

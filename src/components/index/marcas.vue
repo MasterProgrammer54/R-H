@@ -71,7 +71,6 @@ marcaLimite.value = marcas.value.length;
         size="lg"
         class="q-mt-xl"
         flat
-        rounded
         icon-right="expand_more"
         label="Ver mas"
         @click="marcaMostrarTodo"
@@ -80,21 +79,16 @@ marcaLimite.value = marcas.value.length;
   </q-page>
 </template>
 
-<style lang="sass">
-.logoImg
-  width: 60%
-  min-width: 230px
-  height: 60%
-  min-height: 220px
-  object-fit: contain
+<style scoped lang="scss">
 
-.icon-arow
-  animation: moveUp 1s infinite
+.logoImg {
+  width: 60%;
+  min-width: 230px;
+  height: 60%;
+  min-height: 220px;
+  object-fit: contain;
+}
 
-@keyframes moveUp
-  from
-    transform: translateY(0)
-  to
-    transform: translateY(-15px)
+
 
 </style>

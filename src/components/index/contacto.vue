@@ -29,7 +29,7 @@ const MostrarNotificacion = () => {
 
 <template>
   <q-page  class=" items-center justify-center">
-    <div class="text-white bg-secondary" id="contacto">
+    <div class="text-white bg-secondary">
       <div
         class="row"
         :class="[$q.screen.xs ? '' : 'q-pa-xl']"

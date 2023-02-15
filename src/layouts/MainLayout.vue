@@ -4,15 +4,18 @@ import { useRouter } from "vue-router";
 import { auth } from "src/boot/firebase.js";
 const usuarioActivo = ref(false);
 const router = useRouter();
+const avatarLoginGoogle = ref();
 
-//detecta si el usuario esta logeado o o no
 auth.onAuthStateChanged((user) => {
   if (user) {
     usuarioActivo.value = false;
+    avatarLoginGoogle.value = user.photoURL || null;
   } else {
     usuarioActivo.value = true;
   }
+  return user
 });
+
 
 //barra lateral dispositivo movil
 const drawerRight = ref(false);
@@ -73,6 +76,7 @@ const clickCountAumentar = () => {
       <!--navbar-->
       <q-toolbar>
         <q-btn
+        v-if="usuarioActivo"
           flat
           icon="crop_square"
           round
@@ -80,6 +84,11 @@ const clickCountAumentar = () => {
           :class="[{ textlogoXs: $q.screen.xs }, 'textlogo']"
           @click="clickCountAumentar"
         />
+        <q-btn round v-if="!usuarioActivo" class="q-mx-md">
+      <q-avatar size="42px">
+        <img :src="avatarLoginGoogle">
+      </q-avatar>
+    </q-btn>
 
         <q-toolbar-title
           class="text-bold text-primary textTitulo"
@@ -89,7 +98,7 @@ const clickCountAumentar = () => {
           R&H</q-toolbar-title
         >
 
-        <!-- tabs que se mostraran en windows-->
+        <!-- tabs que se mostraran en pantallas grandes-->
         <div class="q-pa-md q-gutter-md colum text-white mobile-hide">
           <q-tabs
             v-if="usuarioActivo"
@@ -110,7 +119,8 @@ const clickCountAumentar = () => {
         <div
           v-if="usuarioActivo"
           class="q-pa-md q-gutter-md colum text-primary desktop-hide"
-        ><q-btn
+        >
+          <q-btn
             icon="menu"
             size="md"
             flat
@@ -124,13 +134,13 @@ const clickCountAumentar = () => {
           v-if="!usuarioActivo"
           class="q-pa-md q-gutter-md colum text-primary"
         >
-          <q-btn icon="home" size="lg" round flat></q-btn>
-          <q-btn icon="dashboard" size="lg" round flat></q-btn>
+          <q-btn icon="home" size="lg" round flat to="/"></q-btn>
+          <q-btn icon="dashboard" size="lg" round flat to="/dashboard"></q-btn>
         </div>
       </q-toolbar>
     </q-header>
 
-    <!-- navegacion (solo en dispositivo movil) -->
+    <!-- navegacion lateral (solo en movil) -->
     <q-drawer
       v-if="usuarioActivo"
       side="right"
@@ -141,14 +151,16 @@ const clickCountAumentar = () => {
       class="bg-secondary text-white"
     >
       <q-scroll-area class="fit q-mt-md">
-        <q-list padding  class="menu-list">
+        <q-list padding class="menu-list">
           <q-item
             v-for="(item, index) in tabs"
             :key="index"
             :active="tab === item.name"
+            active-class="menu-link"
+            @click="tab = item.name"
             clickable
             v-ripple
-            to="/#contacto"
+            exact
           >
             <q-item-section avatar>
               <q-icon :name="item.icon" />
@@ -166,9 +178,10 @@ const clickCountAumentar = () => {
   </q-layout>
 </template>
 
-<style scoped>
-.toolba {
-  height: 65px;
+<style scoped lang="scss">
+.menu-link {
+  color: rgb(12, 12, 12);
+  background: #f2c037;
 }
 
 .textlogo {

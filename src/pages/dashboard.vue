@@ -12,7 +12,7 @@ import {
 } from "firebase/storage";
 
 componets: {
-  toolbar
+  toolbar;
 }
 
 const $q = useQuasar();
@@ -20,39 +20,39 @@ const imagenes = ref<{ name: string; url: string; id: string }[]>([]);
 const logos = ref<{ name: string; url: string; id: string }[]>([]);
 
 const storage = getStorage();
-const ruta = reFfirebase(storage, "celularesReparados/")
-const rutaLogos = reFfirebase(storage, "logos/")
+const ruta = reFfirebase(storage, "celularesReparados/");
+const rutaLogos = reFfirebase(storage, "logos/");
 
 // Descargar la imagen a partir de la URL (mejorar)
 const descargarImg = (data: { url: string; name: string }) => {
-  const link = document.createElement("a")
-  link.href = data.url
-  link.setAttribute("download", data.name)
-  document.body.appendChild(link)
-  link.click()
-}
+  const link = document.createElement("a");
+  link.href = data.url;
+  link.setAttribute("download", data.name);
+  document.body.appendChild(link);
+  link.click();
+};
 
 //elimina foto galeria del array
 function eliminarDEimagenes(id: string) {
-  const index = imagenes.value.findIndex((data) => data.id === id)
+  const index = imagenes.value.findIndex((data) => data.id === id);
   if (index !== -1) {
-    imagenes.value.splice(index, 1)
+    imagenes.value.splice(index, 1);
   }
 }
 //elimina foto logo del array
 function eliminarDElogo(id: string) {
-  const index = imagenes.value.findIndex((data) => data.id === id)
+  const index = imagenes.value.findIndex((data) => data.id === id);
   if (index !== -1) {
-    imagenes.value.splice(index, 1)
+    imagenes.value.splice(index, 1);
   }
 }
 
 //eliminar foto de fitestorage
 async function eliminarFoto(name: string, id: string) {
-  const rutaEliminar = reFfirebase(storage, `celularesReparados/${name}`)
+  const rutaEliminar = reFfirebase(storage, `celularesReparados/${name}`);
   deleteObject(rutaEliminar)
     .then(() => {
-      eliminarDEimagenes(id)
+      eliminarDEimagenes(id);
       $q.notify({
         type: "positive",
         message: `Se elimino. `,
@@ -67,10 +67,10 @@ async function eliminarFoto(name: string, id: string) {
 }
 //eliminar logo de firestorage
 async function eliminarLogo(name: string, id: string) {
-  const rutaEliminar = reFfirebase(storage, `logos/${name}`)
+  const rutaEliminar = reFfirebase(storage, `logos/${name}`);
   deleteObject(rutaEliminar)
     .then(() => {
-      eliminarDEimagenes(id)
+      eliminarDEimagenes(id);
       $q.notify({
         type: "positive",
         message: `Se elimino el logo. `,
@@ -94,19 +94,19 @@ listAll(rutaLogos).then((result) => {
       if (metadata.customMetadata) {
         const name = metadata.customMetadata.name;
         const id = metadata.customMetadata.id;
-        return { name, url, id }
+        return { name, url, id };
       }
-    })
-  })
+    });
+  });
 
   Promise.all(promises).then((result) => {
     logos.value = result.filter((item) => item !== undefined) as {
-      name: string
-      url: string
-      id: string
-    }[]
-  })
-})
+      name: string;
+      url: string;
+      id: string;
+    }[];
+  });
+});
 
 //carga logos a la vista principal
 listAll(ruta).then((result) => {
@@ -118,29 +118,27 @@ listAll(ruta).then((result) => {
       if (metadata.customMetadata) {
         const name = metadata.customMetadata.name;
         const id = metadata.customMetadata.id;
-        return { name, url, id }
+        return { name, url, id };
       }
-    })
-  })
+    });
+  });
 
   Promise.all(promises).then((result) => {
     imagenes.value = result.filter((item) => item !== undefined) as {
-      name: string
-      url: string
-      id: string
-    }[]
-  })
-})
-
-
+      name: string;
+      url: string;
+      id: string;
+    }[];
+  });
+});
 </script>
 
 <template>
   <toolbar />
   <q-page class="bg-secondary text-grey-4">
     <div class="text-h2">
-      <div class="q-py-lg text-h4 text-bold text-center ">
-        SECCIÓN DE SERVICIOS
+      <div class="q-py-lg q-px-xs text-h4 text-bold text-center">
+        GALERIA DE SERVICIOS
       </div>
       <div class="q-py-sm"><br /></div>
     </div>
@@ -180,41 +178,41 @@ listAll(ruta).then((result) => {
       </div>
     </div>
   </q-page>
-  <q-page   class="bg-dark">
+  <q-page class="bg-dark">
     <div class="q-pa-xs bg-dark q-pt-xl">
-
       <div class="text-h2 q-py-xl text-grey-4 text-h4 text-bold text-center">
-        SECCIÓN DE LOGOS
+        GALERIA DE LOGOS
       </div>
+    </div>
+    <div
+      class="row flex items-center justify-center q-px-md"
+      :class="[$q.screen.xs ? 'q-gutter-xl' : 'q-gutter-lg']"
+    >
+      <div v-for="item in logos" :key="item.id">
+        <q-card class="bg-dark card">
+          <img class="imgCard" :src="item.url" />
+          <q-card-actions class="text-white">
+            <span class="q-ml-md">{{ item.name }}</span>
+            <q-space />
+            <q-btn
+              flat
+              round
+              color="red"
+              icon="delete"
+              @click="eliminarLogo(item.name, item.id)"
+            />
+            <q-btn
+              flat
+              round
+              color="white"
+              icon="file_download"
+              @click="descargarImg(item)"
+            />
+          </q-card-actions>
+        </q-card>
       </div>
-      <div
-        class="row flex items-center justify-center q-px-md"
-        :class="[$q.screen.xs ? 'q-gutter-xl' : 'q-gutter-lg']"
-      >
-        <div v-for="item in logos" :key="item.id">
-          <q-card class="bg-dark card">
-            <img class="imgCard" :src="item.url" />
-            <q-card-actions class="text-white">
-              <span class="q-ml-md">{{ item.name }}</span>
-              <q-space />
-              <q-btn
-                flat
-                round
-                color="red"
-                icon="delete"
-                @click="eliminarLogo(item.name, item.id)"
-              />
-              <q-btn
-                flat
-                round
-                color="white"
-                icon="file_download"
-                @click="descargarImg(item)"
-              />
-            </q-card-actions>
-          </q-card>
-        </div>
-      </div>
+    </div>
+    <br />
   </q-page>
 </template>
 
@@ -225,8 +223,8 @@ listAll(ruta).then((result) => {
   box-shadow: -0px -0px 4px 2px rgba(12, 12, 12, 0.75);
 }
 .imgCard {
-  width: 300px;
-  height: 220px;
+  width: 290px;
+  height: 180px;
   object-fit: fill;
 }
 </style>

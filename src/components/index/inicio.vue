@@ -1,11 +1,7 @@
 <script setup lang="ts">
-const scrollToSection = () => {
-  const section = document.querySelector("#contacto");
-  if (section) {
-    section.scrollIntoView({ behavior: "smooth" });
-  }
-};
+
 </script>
+
 <template>
   <div class="bg-secondary text-white">
     <div class="row">
@@ -45,9 +41,8 @@ const scrollToSection = () => {
                   outline
                   color="primary"
                   size="lg"
-                  @click="scrollToSection"
-                  >contactar</q-btn
-                >
+                  label="Contactar"
+                  />
               </div>
             </div>
           </div>
@@ -66,7 +61,7 @@ const scrollToSection = () => {
   </div>
 </template>
 
-<style lang="scss">
+<style scoped lang="scss">
 .imgMiguel {
   width: 60%;
   height: auto;
